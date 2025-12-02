@@ -14,7 +14,7 @@ export default function App3() {
       <View style={styles.container}>
         <Button
           title="Doktorum"
-          onPress={ProducerButtonPressed}
+          onPress={doctorButtonPressed}
           color="#fff"
         ></Button>
       </View>
@@ -27,7 +27,7 @@ export default function App3() {
       <View style={styles.container}>
         <Button
           title="Kullanıcıyım"
-          onPress={CustomerButtonPressed}
+          onPress={userButtonPressed}
           color="#fff"
         ></Button>
       </View>
@@ -35,13 +35,13 @@ export default function App3() {
   );
 }
 
-const CustomerButtonPressed = () => {
+const userButtonPressed = () => {
   router.push("/(tabs)/explore");
   console.log("tüketici");
 };
 
-const ProducerButtonPressed = () => {
-  router.push("/(tabs)/explore");
+const doctorButtonPressed = () => {
+  router.push("/doctor_panel/patients");
   console.log("üretici");
 };
 
