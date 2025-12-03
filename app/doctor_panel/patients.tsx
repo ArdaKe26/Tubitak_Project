@@ -13,7 +13,14 @@
 //   );
 // }
 
-import { Button, Pressable, StyleSheet, TextInput, View } from "react-native";
+import {
+  Appearance,
+  Button,
+  Pressable,
+  StyleSheet,
+  TextInput,
+  View,
+} from "react-native";
 
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
@@ -27,6 +34,8 @@ export default function HomeScreen() {
     id: number;
     text: string;
   };
+
+  const colorScheme = Appearance.getColorScheme();
 
   const [text, setText] = React.useState("");
   const [tasks, setTasks] = React.useState<Task[]>([]);
@@ -123,10 +132,10 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#000000ff",
+    // backgroundColor: "#000000ff",
   },
   itemView: {
-    backgroundColor: "#000000ff",
+    // backgroundColor: "#000000ff",
   },
   titleText: {
     fontSize: 24,
@@ -168,16 +177,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: "#1a1a1a",
+    // backgroundColor: "#1a1a1a",
     padding: 10,
     marginBottom: 8,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: "#333",
+    borderColor: "#525252ff",
   },
 
   taskText: {
-    color: "#fff",
     fontSize: 16,
   },
 });
