@@ -1,5 +1,6 @@
+import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { Button, Text, View } from "react-native";
 import { SelectList } from "react-native-dropdown-select-list";
 import {
   getPatients,
@@ -17,7 +18,8 @@ export default function Infos() {
 
   useEffect(() => {
     const patients = getPatients();
-    const mapped = patients.map((p, i) => ({ key: String(i + 1), value: p }));
+    // Use patient name as both key and value so the SelectList shows the name
+    const mapped = patients.map((p) => ({ key: p, value: p }));
     setData(mapped);
     // if a patient was selected in patients.tsx, pre-select it here
     const sel = getSelectedPatient();
@@ -33,6 +35,10 @@ export default function Infos() {
   const texty = (): string => {
     if (!selected) return "No patients have been selected";
     return selected;
+  };
+
+  const feedback_pressed = () => {
+    router.push("/doctor_panel/feedback");
   };
 
   return (
@@ -56,6 +62,14 @@ export default function Infos() {
       />
 
       <Text>{texty()}</Text>
+
+      <Button
+        title="Give Feedback"
+        onPress={() => {
+          feedback_pressed();
+        }}
+        color={"#0000ffff"}
+      ></Button>
     </View>
   );
 }

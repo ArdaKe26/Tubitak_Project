@@ -18,8 +18,9 @@ import { Button, Pressable, StyleSheet, TextInput, View } from "react-native";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { router } from "expo-router";
-import React from "react";
+import React, { useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { getPatients, setPatients, setSelectedPatient } from "../patientStore";
 
 export default function HomeScreen() {
   type Task = {
@@ -40,35 +41,38 @@ export default function HomeScreen() {
       text: text.trim(),
     };
 
-    setTasks([...tasks, newTask]);
+    const updated = [...tasks, newTask];
+    setTasks(updated);
     setText("");
-    // update shared patient store
     try {
-      const updated = [...tasks, newTask].map((t) => t.text);
-      // lazy import to avoid cycles
-      const store = require("../patientStore");
-      store.setPatients(updated);
-    } catch (e) {
-      // ignore store errors
-    }
+      setPatients(updated.map((t) => t.text));
+    } catch (e) {}
   };
 
   const deleteTask = (id: number) => {
-    setTasks(tasks.filter((task) => task.id !== id));
+    const updated = tasks.filter((task) => task.id !== id);
+    setTasks(updated);
     try {
-      const updated = tasks.filter((task) => task.id !== id).map((t) => t.text);
-      const store = require("../patientStore");
-      store.setPatients(updated);
+      setPatients(updated.map((t) => t.text));
     } catch (e) {}
   };
 
   const patientPressed = (patientText: string) => {
     try {
-      const store = require("../patientStore");
-      store.setSelectedPatient(patientText);
+      setSelectedPatient(patientText);
     } catch (e) {}
     router.push("/doctor_panel/infos");
   };
+
+  useEffect(() => {
+    // Initialize local tasks from store on mount
+    try {
+      const ps = getPatients();
+      if (ps && ps.length) {
+        setTasks(ps.map((p, i) => ({ id: Date.now() + i, text: p })));
+      }
+    } catch (e) {}
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
