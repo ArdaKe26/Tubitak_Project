@@ -36,13 +36,15 @@ export default function App3() {
 }
 
 const userButtonPressed = () => {
-  router.push("/(tabs)/explore");
-  console.log("tüketici");
+  // Redirect user to the login page (app/index.tsx)
+  router.push("/login_user");
+  console.log("tüketici -> login");
 };
 
 const doctorButtonPressed = () => {
-  router.push("/doctor_panel/patients");
-  console.log("üretici");
+  // Redirect doctor to the login page as well
+  router.push("/login_page");
+  console.log("üretici -> login");
 };
 
 const styles = StyleSheet.create({
