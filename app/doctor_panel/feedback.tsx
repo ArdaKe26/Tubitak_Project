@@ -21,10 +21,10 @@ export default function Feedback() {
     const entry = { to: selected, text: message.trim() };
     setHistory((h) => [entry, ...h]);
     setMessage("");
-    Alert.alert(
-      "Gönderildi",
-      `Geri bildirim ${selected} kullanıcısına gönderildi.`
-    );
+    // Alert.alert(
+    //   "Gönderildi",
+    //   `Geri bildirim ${selected} kullanıcısına gönderildi.`
+    // );
     console.log("Feedback sent:", entry);
   };
 

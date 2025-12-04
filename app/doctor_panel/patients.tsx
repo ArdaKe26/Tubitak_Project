@@ -14,6 +14,7 @@
 // }
 
 import {
+  Alert,
   Appearance,
   Button,
   Pressable,
@@ -24,6 +25,7 @@ import {
 
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
+import { getAuth, signOut } from "@firebase/auth";
 import { router } from "expo-router";
 import React, { useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -83,6 +85,21 @@ export default function HomeScreen() {
     } catch (e) {}
   }, []);
 
+  const handleLogout = async () => {
+    try {
+      const auth = getAuth();
+      await signOut(auth);
+      // Redirect to login page after sign out
+      router.replace("/Panel_Seciniz");
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        Alert.alert("Çıkış Hatası", err.message);
+      } else {
+        Alert.alert("Çıkış Hatası", "Bilinmeyen bir hata oluştu.");
+      }
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ThemedView style={styles.itemView}>
@@ -123,6 +140,9 @@ export default function HomeScreen() {
               />
             </Pressable>
           ))}
+          <View style={styles.logoutWrapper}>
+            <Button title="Çıkış Yap" color="#d9534f" onPress={handleLogout} />
+          </View>
         </View>
       </ThemedView>
     </SafeAreaView>
@@ -153,7 +173,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "#525252ff",
     borderRadius: 20,
-    color: "#fff",
+    // color: "#fff",
     paddingLeft: 10,
   },
   inputRow: {
@@ -187,5 +207,10 @@ const styles = StyleSheet.create({
 
   taskText: {
     fontSize: 16,
+  },
+  logoutWrapper: {
+    marginTop: 20,
+    alignSelf: "center",
+    width: 200,
   },
 });
