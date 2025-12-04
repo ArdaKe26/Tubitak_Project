@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Alert, Button, StyleSheet, Text, TextInput, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { getSelectedPatient } from "../patientStore";
 
 export default function Feedback() {
@@ -29,7 +30,7 @@ export default function Feedback() {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Feedback Screen</Text>
       <Text style={styles.subtitle}>
         Burada doktorlar, `Infos` sayfasında seçili hastaya geri dönüş
@@ -69,7 +70,7 @@ export default function Feedback() {
           ))}
         </View>
       )}
-    </View>
+    </SafeAreaView>
   );
 }
 

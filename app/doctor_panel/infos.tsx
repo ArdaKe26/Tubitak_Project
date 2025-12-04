@@ -1,7 +1,8 @@
 import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { Button, Text, View } from "react-native";
+import { Button, Text } from "react-native";
 import { SelectList } from "react-native-dropdown-select-list";
+import { SafeAreaView } from "react-native-safe-area-context";
 import {
   getPatients,
   getSelectedPatient,
@@ -42,7 +43,7 @@ export default function Infos() {
   };
 
   return (
-    <View>
+    <SafeAreaView>
       <Text>Infos Screen</Text>
       <Text>
         Here doctors will be able to see their patients monthly breath
@@ -70,6 +71,6 @@ export default function Infos() {
         }}
         color={"#0000ffff"}
       ></Button>
-    </View>
+    </SafeAreaView>
   );
 }

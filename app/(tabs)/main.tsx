@@ -2,6 +2,7 @@ import { getAuth, signOut } from "@firebase/auth";
 import { router } from "expo-router";
 import React from "react";
 import { Alert, Button, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function TabTwoScreen() {
   const handleLogout = async () => {
@@ -20,7 +21,7 @@ export default function TabTwoScreen() {
   };
 
   return (
-    <View>
+    <SafeAreaView>
       <Text>Main Screen</Text>
       <Text>
         Here users will be able to see their helath data that has been recorded
@@ -37,7 +38,7 @@ export default function TabTwoScreen() {
       <View style={styles.logoutWrapper}>
         <Button title="Çıkış Yap" color="#d9534f" onPress={handleLogout} />
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 

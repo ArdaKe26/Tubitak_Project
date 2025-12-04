@@ -1,10 +1,11 @@
 import { router } from "expo-router";
 import React from "react";
 import { Button, Image, StyleSheet, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function App3() {
   return (
-    <View style={styles.container2}>
+    <SafeAreaView style={styles.container2}>
       <Image
         alt="App Logo"
         resizeMode="contain"
@@ -31,7 +32,7 @@ export default function App3() {
           color="#fff"
         ></Button>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
   },
 
   container2: {
-    backgroundColor: "#ffff",
+    // backgroundColor: "#ffff",
   },
   headerImg1: {
     width: 220,

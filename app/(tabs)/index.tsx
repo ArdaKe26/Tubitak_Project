@@ -12,6 +12,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 // Use runtime require for the native BLE lib to avoid build errors when it's not installed.
 // Types are kept as `any` here so the project can compile even before the dependency is added.
 
@@ -193,7 +194,7 @@ export default function HomeScreen(): React.ReactElement {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.content}>
         <Text style={styles.title}>Cihazlar</Text>
         <Text style={styles.subtitle}>
@@ -256,7 +257,7 @@ export default function HomeScreen(): React.ReactElement {
           </View>
         </View>
       </Modal>
-    </View>
+    </SafeAreaView>
   );
 }
 

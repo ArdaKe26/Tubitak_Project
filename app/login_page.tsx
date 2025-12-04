@@ -12,12 +12,12 @@ import {
   Alert,
   Button,
   Image,
-  ScrollView,
   StyleSheet,
   Text,
   TextInput,
   View,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBVU4KPRdEKNdg0tt2hep4Ymy8RlatH_GM",
@@ -70,7 +70,7 @@ export default function LoginScreen(): React.ReactElement {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.authContainer}>
         <View style={styles.header}>
           <Image
@@ -125,7 +125,7 @@ export default function LoginScreen(): React.ReactElement {
           </Text>
         </View>
       </View>
-    </ScrollView>
+    </SafeAreaView>
   );
 }
 
