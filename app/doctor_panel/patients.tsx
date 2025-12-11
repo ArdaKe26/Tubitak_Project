@@ -16,15 +16,17 @@
 import {
   Alert,
   Appearance,
-  Button,
   Pressable,
   StyleSheet,
   TextInput,
   View,
+  Text,
+  TouchableOpacity,
 } from "react-native";
 
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
+import theme from "../styles/theme";
 import { getAuth, signOut } from "@firebase/auth";
 import { router } from "expo-router";
 import React, { useEffect } from "react";
@@ -102,46 +104,41 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ThemedView style={styles.itemView}>
-        <ThemedText style={styles.titleText}>Patients List</ThemedText>
+      <ThemedView style={[styles.itemView, theme.elevation.low as any]}>
+        <ThemedText style={styles.titleText}>Hastalar</ThemedText>
         <View style={styles.inputRow}>
           <TextInput
             style={styles.textBox}
-            placeholder="Add a new patient"
-            placeholderTextColor="#ccc"
+            placeholder="Yeni hasta ekle"
+            placeholderTextColor="#999"
             value={text}
             onChangeText={setText}
           />
-          <View style={styles.button}>
-            <Button
-              title="Add"
-              color={"white"}
-              onPress={() => {
-                addTask();
-              }}
-            />
-          </View>
+          <TouchableOpacity style={styles.addButton} onPress={addTask}>
+            <Text style={styles.addButtonText}>Ekle</Text>
+          </TouchableOpacity>
         </View>
 
         <View style={styles.taskList}>
           {tasks.map((task, index) => (
             <Pressable
               key={index}
-              style={styles.taskItem}
+              style={[styles.taskItem, theme.elevation.low as any]}
               onPress={() => {
                 patientPressed(task.text);
               }}
             >
               <ThemedText style={styles.taskText}>{task.text}</ThemedText>
-              <Button
-                title="❌"
-                color="red"
-                onPress={() => deleteTask(task.id)}
-              />
+              <TouchableOpacity onPress={() => deleteTask(task.id)} style={styles.deleteButton}>
+                <Text style={styles.deleteButtonText}>Sil</Text>
+              </TouchableOpacity>
             </Pressable>
           ))}
+
           <View style={styles.logoutWrapper}>
-            <Button title="Çıkış Yap" color="#d9534f" onPress={handleLogout} />
+            <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+              <Text style={styles.logoutText}>Çıkış Yap</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </ThemedView>
@@ -213,4 +210,16 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     width: 200,
   },
+  addButton: {
+    backgroundColor: theme.palette.primary,
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 12,
+    justifyContent: "center",
+  },
+  addButtonText: { color: "#fff", fontWeight: "700" },
+  deleteButton: { backgroundColor: theme.palette.danger, paddingHorizontal: 10, paddingVertical: 6, borderRadius: 8 },
+  deleteButtonText: { color: "#fff", fontWeight: "700" },
+  logoutButton: { backgroundColor: theme.palette.danger, paddingVertical: 10, paddingHorizontal: 20, borderRadius: 12 },
+  logoutText: { color: "#fff", fontWeight: "700" },
 });

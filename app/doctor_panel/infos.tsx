@@ -1,15 +1,15 @@
 import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { Button, Text } from "react-native";
+import { SafeAreaView, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { SelectList } from "react-native-dropdown-select-list";
-import { SafeAreaView } from "react-native-safe-area-context";
+import theme from "../styles/theme";
 import {
   getPatients,
   getSelectedPatient,
   setSelectedPatient,
 } from "../patientStore";
 
-export default function Infos() {
+export default function Infos(): React.ReactElement {
   const [selected, setSelected] = React.useState("");
 
   const [data, setData] = useState<{ key: string; value: string }[]>([]);
@@ -19,10 +19,8 @@ export default function Infos() {
 
   useEffect(() => {
     const patients = getPatients();
-    // Use patient name as both key and value so the SelectList shows the name
     const mapped = patients.map((p) => ({ key: p, value: p }));
     setData(mapped);
-    // if a patient was selected in patients.tsx, pre-select it here
     const sel = getSelectedPatient();
     if (sel) {
       setSelected(sel);
@@ -43,34 +41,52 @@ export default function Infos() {
   };
 
   return (
-    <SafeAreaView>
-      <Text>Infos Screen</Text>
-      <Text>
-        Here doctors will be able to see their patients monthly breath
-        information
-      </Text>
+    <SafeAreaView style={styles.screen}>
+      <View style={[styles.header, theme.elevation.low as any]}>
+        <Text style={styles.title}>Patient Info</Text>
+        <Text style={styles.subtitle}>Select a patient to see details</Text>
+      </View>
 
-      <SelectList
-        setSelected={(val: string) => {
-          setSelected(val);
-          try {
-            setSelectedPatient(val);
-          } catch (e) {}
-        }}
-        data={data}
-        save="value"
-        defaultOption={defaultOption}
-      />
+      <View style={styles.content}>
+        <SelectList
+          setSelected={(val: string) => {
+            setSelected(val);
+            try {
+              setSelectedPatient(val);
+            } catch (e) {}
+          }}
+          data={data}
+          save="value"
+          defaultOption={defaultOption}
+          boxStyles={styles.selectBox}
+          dropdownStyles={styles.dropdown}
+        />
 
-      <Text>{texty()}</Text>
+        <View style={[styles.infoCard, theme.elevation.medium as any]}>
+          <Text style={styles.selectedText}>{texty()}</Text>
+        </View>
 
-      <Button
-        title="Give Feedback"
-        onPress={() => {
-          feedback_pressed();
-        }}
-        color={"#0000ffff"}
-      ></Button>
+        <View style={styles.buttonRow}>
+          <TouchableOpacity style={styles.primaryButton} onPress={feedback_pressed}>
+            <Text style={styles.primaryButtonText}>Geri Bildirim Gönder</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  screen: { flex: 1, backgroundColor: theme.palette.background },
+  header: { padding: theme.spacing.md },
+  title: { fontSize: theme.typography.h2, fontWeight: "700", color: theme.palette.text },
+  subtitle: { color: theme.palette.muted, marginTop: 6 },
+  content: { paddingHorizontal: theme.spacing.md },
+  selectBox: { borderRadius: 10, borderColor: theme.palette.border, backgroundColor: theme.palette.surface, paddingHorizontal: theme.spacing.sm },
+  dropdown: { borderRadius: 10 },
+  infoCard: { marginTop: theme.spacing.md, padding: theme.spacing.md, borderRadius: 12, backgroundColor: theme.palette.surface },
+  selectedText: { fontSize: 18, marginTop: 0, color: theme.palette.text },
+  buttonRow: { marginTop: theme.spacing.lg, width: 180 },
+  primaryButton: { backgroundColor: theme.palette.primaryDark, borderRadius: 10, overflow: "hidden", paddingVertical: 10, alignItems: "center" },
+  primaryButtonText: { color: "#fff", fontWeight: "700" },
+});

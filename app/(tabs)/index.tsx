@@ -13,6 +13,7 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import theme from "../styles/theme";
 // Use runtime require for the native BLE lib to avoid build errors when it's not installed.
 // Types are kept as `any` here so the project can compile even before the dependency is added.
 
@@ -194,15 +195,21 @@ export default function HomeScreen(): React.ReactElement {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, { backgroundColor: theme.palette.background }]}> 
       <View style={styles.content}>
-        <Text style={styles.title}>Cihazlar</Text>
-        <Text style={styles.subtitle}>
-          Bluetooth aracılığıyla cihaz bağlamak için butona tıklayın.
-        </Text>
+        <View style={[styles.headerCard, theme.elevation.low as any]}>
+          <Text style={styles.title}>Cihazlar</Text>
+          <Text style={styles.subtitle}>Bluetooth ile cihaz bağlamak için butona tıklayın.</Text>
+          <View style={styles.heroButtons}>
+            <TouchableOpacity style={styles.primaryButton} onPress={openBluetoothModal}>
+              <Text style={styles.primaryButtonText}>Bluetooth Bağla</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
 
-        <View style={styles.buttonRow}>
-          <Button title="Bluetooth Bağla" onPress={openBluetoothModal} />
+        <View style={styles.statusCard}>
+          <Text style={styles.statusLabel}>Bağlı Cihaz</Text>
+          <Text style={styles.statusValue}>{connectedDeviceId ?? "Hiçbiri"}</Text>
         </View>
       </View>
 
@@ -264,9 +271,17 @@ export default function HomeScreen(): React.ReactElement {
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 16 },
   content: { flex: 1 },
-  title: { fontSize: 20, fontWeight: "700", marginBottom: 8 },
-  subtitle: { color: "#666", marginBottom: 16 },
-  buttonRow: { width: 180 },
+  headerCard: { padding: 16, borderRadius: 12, backgroundColor: theme.palette.surface, marginBottom: 12 },
+  title: { fontSize: 20, fontWeight: "700", marginBottom: 6, color: theme.palette.text },
+  subtitle: { color: theme.palette.muted, marginBottom: 12 },
+  heroButtons: { flexDirection: "row", marginTop: 8 },
+  primaryButton: { backgroundColor: theme.palette.primary, paddingVertical: 10, paddingHorizontal: 14, borderRadius: 10 },
+  primaryButtonText: { color: "#fff", fontWeight: "700" },
+
+  statusCard: { padding: 14, borderRadius: 12, backgroundColor: theme.palette.surface, ...theme.elevation.low as any },
+  statusLabel: { color: theme.palette.muted, fontSize: 12 },
+  statusValue: { fontSize: 16, fontWeight: "700", marginTop: 6, color: theme.palette.text },
+
   modalContainer: { flex: 1, padding: 16 },
   modalTitle: { fontSize: 18, fontWeight: "700", marginBottom: 12 },
   hint: { marginBottom: 8 },

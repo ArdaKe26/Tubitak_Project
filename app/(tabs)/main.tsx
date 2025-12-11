@@ -1,10 +1,10 @@
 import { getAuth, signOut } from "@firebase/auth";
 import { router } from "expo-router";
 import React from "react";
-import { Alert, Button, StyleSheet, Text, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { Alert, Button, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import theme from "../styles/theme";
 
-export default function TabTwoScreen() {
+export default function TabTwoScreen(): React.ReactElement {
   const handleLogout = async () => {
     try {
       const auth = getAuth();
@@ -19,43 +19,45 @@ export default function TabTwoScreen() {
       }
     }
   };
-
   return (
-    <SafeAreaView>
-      <Text>Main Screen</Text>
-      <Text>
-        Here users will be able to see their helath data that has been recorded
-        and analyzed from their breath samples
-      </Text>
+    <SafeAreaView style={styles.screen}>
+      <View style={[styles.header, theme.elevation.low as any]}>
+        <Text style={styles.title}>Analizler</Text>
+        <Text style={styles.subtitle}>Nefes örneklerinizden elde edilen sağlık verileri</Text>
+      </View>
 
-      <Text>Analiz Sonuçları:</Text>
-
-      <Text> - Son 1 Ay: </Text>
-      <Text> - Son 3 Ay: </Text>
-      <Text> - Son 6 Ay: </Text>
-      <Text> - Son 1 Yıl: </Text>
+      <View style={styles.metricsRow}>
+        <View style={[styles.metricCard, theme.elevation.low as any]}>
+          <Text style={styles.metricValue}>—</Text>
+          <Text style={styles.metricLabel}>Son 1 Ay</Text>
+        </View>
+        <View style={[styles.metricCard, theme.elevation.low as any]}>
+          <Text style={styles.metricValue}>—</Text>
+          <Text style={styles.metricLabel}>Son 3 Ay</Text>
+        </View>
+      </View>
 
       <View style={styles.logoutWrapper}>
-        <Button title="Çıkış Yap" color="#d9534f" onPress={handleLogout} />
+        <View style={styles.dangerButton}>
+          <Button title="Çıkış Yap" color={"#fff"} onPress={handleLogout} />
+        </View>
       </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: "#808080",
-    bottom: -90,
-    left: -35,
-    position: "absolute",
-  },
-  titleContainer: {
-    flexDirection: "row",
-    gap: 8,
-  },
-  logoutWrapper: {
-    marginTop: 20,
-    alignSelf: "center",
-    width: 200,
-  },
+  screen: { flex: 1, backgroundColor: theme.palette.background, padding: theme.spacing.md },
+  header: { paddingVertical: theme.spacing.md },
+  title: { fontSize: theme.typography.h2, fontWeight: "700", color: theme.palette.text },
+  subtitle: { color: theme.palette.muted, marginTop: 6 },
+  card: { backgroundColor: theme.palette.surface, padding: theme.spacing.md, borderRadius: 12, marginTop: theme.spacing.md },
+  sectionTitle: { fontWeight: "700", color: theme.palette.text, marginBottom: theme.spacing.sm },
+  item: { color: theme.palette.text, marginBottom: 6 },
+  logoutWrapper: { marginTop: theme.spacing.lg, alignSelf: "center", width: 200 },
+  metricsRow: { flexDirection: "row", gap: theme.spacing.md, marginTop: theme.spacing.md },
+  metricCard: { flex: 1, backgroundColor: theme.palette.surface, padding: theme.spacing.md, borderRadius: 12, alignItems: "center" },
+  metricValue: { fontSize: 20, fontWeight: "700", color: theme.palette.primaryDark },
+  metricLabel: { color: theme.palette.muted, marginTop: 6 },
+  dangerButton: { backgroundColor: theme.palette.danger, borderRadius: 10, overflow: "hidden", width: 200 },
 });
