@@ -16,22 +16,24 @@
 import {
   Alert,
   Appearance,
+  Keyboard,
   Pressable,
   StyleSheet,
-  TextInput,
-  View,
   Text,
+  TextInput,
   TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
 } from "react-native";
 
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
-import theme from "../styles/theme";
 import { getAuth, signOut } from "@firebase/auth";
 import { router } from "expo-router";
 import React, { useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { getPatients, setPatients, setSelectedPatient } from "../patientStore";
+import theme from "../styles/theme";
 
 export default function HomeScreen() {
   type Task = {
@@ -103,46 +105,57 @@ export default function HomeScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ThemedView style={[styles.itemView, theme.elevation.low as any]}>
-        <ThemedText style={styles.titleText}>Hastalar</ThemedText>
-        <View style={styles.inputRow}>
-          <TextInput
-            style={styles.textBox}
-            placeholder="Yeni hasta ekle"
-            placeholderTextColor="#999"
-            value={text}
-            onChangeText={setText}
-          />
-          <TouchableOpacity style={styles.addButton} onPress={addTask}>
-            <Text style={styles.addButtonText}>Ekle</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.taskList}>
-          {tasks.map((task, index) => (
-            <Pressable
-              key={index}
-              style={[styles.taskItem, theme.elevation.low as any]}
-              onPress={() => {
-                patientPressed(task.text);
-              }}
-            >
-              <ThemedText style={styles.taskText}>{task.text}</ThemedText>
-              <TouchableOpacity onPress={() => deleteTask(task.id)} style={styles.deleteButton}>
-                <Text style={styles.deleteButtonText}>Sil</Text>
-              </TouchableOpacity>
-            </Pressable>
-          ))}
-
-          <View style={styles.logoutWrapper}>
-            <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-              <Text style={styles.logoutText}>Çıkış Yap</Text>
+    <TouchableWithoutFeedback
+      onPress={() => Keyboard.dismiss()}
+      accessible={false}
+    >
+      <SafeAreaView style={styles.container}>
+        <ThemedView style={[styles.itemView, theme.elevation.low as any]}>
+          <ThemedText style={styles.titleText}>Hastalar</ThemedText>
+          <View style={styles.inputRow}>
+            <TextInput
+              style={styles.textBox}
+              placeholder="Yeni hasta ekle"
+              placeholderTextColor="#999"
+              value={text}
+              onChangeText={setText}
+            />
+            <TouchableOpacity style={styles.addButton} onPress={addTask}>
+              <Text style={styles.addButtonText}>Ekle</Text>
             </TouchableOpacity>
           </View>
-        </View>
-      </ThemedView>
-    </SafeAreaView>
+
+          <View style={styles.taskList}>
+            {tasks.map((task, index) => (
+              <Pressable
+                key={index}
+                style={[styles.taskItem, theme.elevation.low as any]}
+                onPress={() => {
+                  patientPressed(task.text);
+                }}
+              >
+                <ThemedText style={styles.taskText}>{task.text}</ThemedText>
+                <TouchableOpacity
+                  onPress={() => deleteTask(task.id)}
+                  style={styles.deleteButton}
+                >
+                  <Text style={styles.deleteButtonText}>Sil</Text>
+                </TouchableOpacity>
+              </Pressable>
+            ))}
+
+            <View style={styles.logoutWrapper}>
+              <TouchableOpacity
+                style={styles.logoutButton}
+                onPress={handleLogout}
+              >
+                <Text style={styles.logoutText}>Çıkış Yap</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </ThemedView>
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 }
 
@@ -153,6 +166,8 @@ const styles = StyleSheet.create({
   },
   itemView: {
     // backgroundColor: "#000000ff",
+    marginLeft: theme.spacing.md,
+    marginRight: theme.spacing.md,
   },
   titleText: {
     fontSize: 24,
@@ -188,6 +203,7 @@ const styles = StyleSheet.create({
   taskList: {
     marginTop: 10,
     paddingHorizontal: 10,
+    marginBottom: 20,
   },
 
   taskItem: {
@@ -218,8 +234,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   addButtonText: { color: "#fff", fontWeight: "700" },
-  deleteButton: { backgroundColor: theme.palette.danger, paddingHorizontal: 10, paddingVertical: 6, borderRadius: 8 },
+  deleteButton: {
+    backgroundColor: theme.palette.danger,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderRadius: 8,
+  },
   deleteButtonText: { color: "#fff", fontWeight: "700" },
-  logoutButton: { backgroundColor: theme.palette.danger, paddingVertical: 10, paddingHorizontal: 20, borderRadius: 12 },
+  logoutButton: {
+    backgroundColor: theme.palette.danger,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 12,
+  },
   logoutText: { color: "#fff", fontWeight: "700" },
 });
