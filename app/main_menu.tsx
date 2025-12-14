@@ -1,12 +1,14 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
 import {
+  Image,
   SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
+import { matrisMainLogoWhite } from "./photosStore";
 import theme from "./styles/theme";
 
 export default function MainMenu(): React.ReactElement {
@@ -16,17 +18,14 @@ export default function MainMenu(): React.ReactElement {
 
   return (
     <SafeAreaView style={styles.screen}>
-      {/* Arka Plan Gradyan */}
       <LinearGradient
         colors={[theme.palette.primary, theme.palette.primaryDark]}
         style={styles.gradient}
       />
 
       <View style={styles.hero}>
-        <Text style={styles.heroTitle}>MATRİS</Text>
-        <Text style={styles.heroSubtitle}>
-          Hasta yönetimi ve nefes sağlığı verileri
-        </Text>
+        <Image source={matrisMainLogoWhite} style={styles.imageContainer} />
+        <Text style={styles.heroSubtitle}>Nefesinden Sağlığını Keşfet</Text>
 
         <TouchableOpacity
           style={styles.primaryButton}
@@ -66,12 +65,12 @@ const styles = StyleSheet.create({
   heroSubtitle: {
     color: "rgba(255,255,255,0.85)",
     marginTop: theme.spacing.sm,
-    fontSize: 16,
+    fontSize: 22,
   },
 
   primaryButton: {
     marginTop: 40,
-    backgroundColor: theme.palette.accent,
+    backgroundColor: theme.palette.surface,
     paddingVertical: 14,
     paddingHorizontal: 40,
     borderRadius: 14,
@@ -82,8 +81,12 @@ const styles = StyleSheet.create({
   },
 
   primaryButtonText: {
-    color: "#fff",
+    color: theme.palette.primaryLight,
     fontSize: 20,
     fontWeight: "700",
+  },
+  imageContainer: {
+    height: 80,
+    width: 250,
   },
 });

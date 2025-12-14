@@ -23,6 +23,7 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { matrisMainLogo } from "./photosStore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBVU4KPRdEKNdg0tt2hep4Ymy8RlatH_GM",
@@ -103,12 +104,12 @@ export default function LoginScreen(): React.ReactElement {
             <Image
               resizeMode="contain"
               style={styles.headerImg}
-              source={require("../assets/images/icon.png")}
+              source={matrisMainLogo}
             />
             <Text style={{ fontSize: 31, fontWeight: "700", color: "#075eec" }}>
               Kullanıcı
             </Text>
-            <Text style={styles.subtitle}>Tarımda Teknolojiyi Keşfedin!!</Text>
+            <Text style={styles.subtitle}>Sağlık, bir nefesle başlar</Text>
           </View>
 
           <Text style={styles.inputLabel}>Email</Text>
@@ -235,6 +236,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: "500",
     color: "#929292",
+    marginTop: 5,
   },
   input: {
     height: 50,
@@ -284,11 +286,11 @@ const styles = StyleSheet.create({
     marginVertical: 36,
   },
   headerImg: {
-    width: 120,
-    height: 120,
+    width: 200,
+    height: 80,
     alignSelf: "center",
     marginBottom: 20,
-    marginTop: -30,
+    marginTop: 10,
     borderRadius: 30,
   },
   passwordForgetText: {
@@ -301,6 +303,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "rgba(0,0,0,0.5)",
+    marginBottom: 60,
   },
   modalContainer: {
     width: "80%",

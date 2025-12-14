@@ -66,6 +66,7 @@ export default function Feedback() {
                 ? `Geri bildirim yazın (${selected})`
                 : "Önce bir hasta seçin"
             }
+            placeholderTextColor={"#afafafff"}
             value={message}
             onChangeText={setMessage}
             multiline
@@ -111,7 +112,12 @@ const styles = StyleSheet.create({
   },
   subtitle: { marginBottom: 12, color: theme.palette.muted },
   content: { marginBottom: 16, marginLeft: 16, marginRight: 16 },
-  label: { fontWeight: "600", marginTop: 8, color: theme.palette.text },
+  label: {
+    fontWeight: "600",
+    marginTop: 8,
+    color: theme.palette.text,
+    marginBottom: 5,
+  },
   selected: { marginBottom: 8, color: theme.palette.text },
   input: {
     borderWidth: 0,

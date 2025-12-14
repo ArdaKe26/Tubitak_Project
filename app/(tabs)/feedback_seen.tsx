@@ -1,39 +1,41 @@
 import React from "react";
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
-import { getFeedbacks } from "../feedbackStore"; // 🔥 EKLENDİ
+import { getFeedbacks } from "../feedbackStore";
 import theme from "../styles/theme";
 
 export default function FeedbackSeen() {
-  const feedbacks = getFeedbacks(); // 🔥 tüm geri bildirimleri al
+  const feedbacks = getFeedbacks();
 
   return (
-    <SafeAreaView style={styles.screen}>
-      <View style={[styles.header, theme.elevation.low as any]}>
-        <Text style={styles.title}>Gelen Geri Bildirimler</Text>
-        <Text style={styles.subtitle}>
-          Doktorunuzun size verdiği geri bildirimleri burada
-          görüntüleyebilirsiniz.
-        </Text>
-      </View>
-
-      <View style={styles.listWrap}>
-        {feedbacks.length === 0 && (
-          <Text style={{ color: theme.palette.muted }}>
-            Henüz geri bildirim yok.
+    <View style={{ flex: 1, backgroundColor: theme.palette.background }}>
+      <SafeAreaView style={styles.screen}>
+        <View style={[styles.header, theme.elevation.low as any]}>
+          <Text style={styles.title}>Gelen Geri Bildirimler</Text>
+          <Text style={styles.subtitle}>
+            Doktorunuzun size verdiği geri bildirimleri burada
+            görüntüleyebilirsiniz.
           </Text>
-        )}
+        </View>
 
-        {feedbacks.map((f, i) => (
-          <View
-            key={i}
-            style={[styles.feedbackItem, theme.elevation.low as any]}
-          >
-            <Text style={styles.feedbackTitle}>{f.to}</Text>
-            <Text style={styles.feedbackText}>{f.text}</Text>
-          </View>
-        ))}
-      </View>
-    </SafeAreaView>
+        <View style={styles.listWrap}>
+          {feedbacks.length === 0 && (
+            <Text style={{ color: theme.palette.muted }}>
+              Henüz geri bildirim yok.
+            </Text>
+          )}
+
+          {feedbacks.map((f, i) => (
+            <View
+              key={i}
+              style={[styles.feedbackItem, theme.elevation.low as any]}
+            >
+              <Text style={styles.feedbackTitle}>{f.to}</Text>
+              <Text style={styles.feedbackText}>{f.text}</Text>
+            </View>
+          ))}
+        </View>
+      </SafeAreaView>
+    </View>
   );
 }
 
@@ -48,6 +50,7 @@ const styles = StyleSheet.create({
   header: {
     padding: theme.spacing.md,
     borderRadius: 12,
+    marginTop: theme.spacing.md,
     backgroundColor: theme.palette.surface,
   },
   title: {

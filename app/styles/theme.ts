@@ -10,6 +10,7 @@ const palette = {
   danger: "#ef4444",
   success: "#16a34a",
   border: "#dbe9ff",
+  primaryButton: "#086ef3ff"
 };
 
 export const spacing = {

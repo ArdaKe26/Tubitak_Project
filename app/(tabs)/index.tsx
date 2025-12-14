@@ -195,13 +195,20 @@ export default function HomeScreen(): React.ReactElement {
   };
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: theme.palette.background }]}> 
+    <SafeAreaView
+      style={[styles.container, { backgroundColor: theme.palette.background }]}
+    >
       <View style={styles.content}>
         <View style={[styles.headerCard, theme.elevation.low as any]}>
           <Text style={styles.title}>Cihazlar</Text>
-          <Text style={styles.subtitle}>Bluetooth ile cihaz bağlamak için butona tıklayın.</Text>
+          <Text style={styles.subtitle}>
+            Bluetooth ile cihaz bağlamak için butona tıklayın.
+          </Text>
           <View style={styles.heroButtons}>
-            <TouchableOpacity style={styles.primaryButton} onPress={openBluetoothModal}>
+            <TouchableOpacity
+              style={styles.primaryButton}
+              onPress={openBluetoothModal}
+            >
               <Text style={styles.primaryButtonText}>Bluetooth Bağla</Text>
             </TouchableOpacity>
           </View>
@@ -209,7 +216,9 @@ export default function HomeScreen(): React.ReactElement {
 
         <View style={styles.statusCard}>
           <Text style={styles.statusLabel}>Bağlı Cihaz</Text>
-          <Text style={styles.statusValue}>{connectedDeviceId ?? "Hiçbiri"}</Text>
+          <Text style={styles.statusValue}>
+            {connectedDeviceId ?? "Hiçbiri"}
+          </Text>
         </View>
       </View>
 
@@ -271,16 +280,41 @@ export default function HomeScreen(): React.ReactElement {
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 16 },
   content: { flex: 1 },
-  headerCard: { padding: 16, borderRadius: 12, backgroundColor: theme.palette.surface, marginBottom: 12 },
-  title: { fontSize: 20, fontWeight: "700", marginBottom: 6, color: theme.palette.text },
+  headerCard: {
+    padding: 16,
+    borderRadius: 12,
+    backgroundColor: theme.palette.surface,
+    marginBottom: 12,
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: "700",
+    marginBottom: 6,
+    color: theme.palette.text,
+  },
   subtitle: { color: theme.palette.muted, marginBottom: 12 },
   heroButtons: { flexDirection: "row", marginTop: 8 },
-  primaryButton: { backgroundColor: theme.palette.primary, paddingVertical: 10, paddingHorizontal: 14, borderRadius: 10 },
+  primaryButton: {
+    backgroundColor: theme.palette.primary,
+    paddingVertical: 10,
+    paddingHorizontal: 14,
+    borderRadius: 10,
+  },
   primaryButtonText: { color: "#fff", fontWeight: "700" },
 
-  statusCard: { padding: 14, borderRadius: 12, backgroundColor: theme.palette.surface, ...theme.elevation.low as any },
+  statusCard: {
+    padding: 14,
+    borderRadius: 12,
+    backgroundColor: theme.palette.surface,
+    ...(theme.elevation.low as any),
+  },
   statusLabel: { color: theme.palette.muted, fontSize: 12 },
-  statusValue: { fontSize: 16, fontWeight: "700", marginTop: 6, color: theme.palette.text },
+  statusValue: {
+    fontSize: 16,
+    fontWeight: "700",
+    marginTop: 6,
+    color: theme.palette.text,
+  },
 
   modalContainer: { flex: 1, padding: 16 },
   modalTitle: { fontSize: 18, fontWeight: "700", marginBottom: 12 },

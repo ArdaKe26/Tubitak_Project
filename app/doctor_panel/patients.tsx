@@ -162,10 +162,10 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: "#000000ff",
+    backgroundColor: "#fff",
   },
   itemView: {
-    // backgroundColor: "#000000ff",
+    backgroundColor: "#fff",
     marginLeft: theme.spacing.md,
     marginRight: theme.spacing.md,
   },
@@ -175,6 +175,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     textAlign: "left",
     padding: 10,
+    color: "#000",
   },
   textBox: {
     height: 40,
@@ -220,6 +221,7 @@ const styles = StyleSheet.create({
 
   taskText: {
     fontSize: 16,
+    color: "#000",
   },
   logoutWrapper: {
     marginTop: 20,
@@ -246,6 +248,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 12,
+    alignItems: "center",
   },
   logoutText: { color: "#fff", fontWeight: "700" },
 });

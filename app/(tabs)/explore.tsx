@@ -35,7 +35,6 @@ export default function TabTwoScreen(): React.ReactElement {
           style={styles.container}
           behavior={Platform.OS === "ios" ? "padding" : undefined}
         >
-          {/* TOP CONTENT */}
           <View style={styles.top}>
             <View style={styles.hero}>
               <Text style={styles.title}>AI Asistanı</Text>
@@ -46,7 +45,6 @@ export default function TabTwoScreen(): React.ReactElement {
             </View>
           </View>
 
-          {/* CHAT AREA */}
           <ScrollView
             style={styles.chatArea}
             contentContainerStyle={{ paddingBottom: 20 }}
@@ -60,7 +58,6 @@ export default function TabTwoScreen(): React.ReactElement {
             ))}
           </ScrollView>
 
-          {/* INPUT BAR */}
           <View style={styles.footer}>
             <View style={styles.inputRow}>
               <TextInput
@@ -105,7 +102,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: theme.typography.h2,
     fontWeight: "800",
-    color: theme.palette.primaryDark,
+    color: theme.palette.text,
   },
   subtitle: {
     marginTop: theme.spacing.sm,
