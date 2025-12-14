@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   },
 
   primaryButtonText: {
-    color: theme.palette.primaryLight,
+    color: theme.palette.primary,
     fontSize: 20,
     fontWeight: "700",
   },
