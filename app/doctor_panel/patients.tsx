@@ -18,6 +18,7 @@ import {
   Appearance,
   Keyboard,
   Pressable,
+  StatusBar,
   StyleSheet,
   Text,
   TextInput,
@@ -110,6 +111,7 @@ export default function HomeScreen() {
       accessible={false}
     >
       <SafeAreaView style={styles.container}>
+        <StatusBar barStyle={"dark-content"} />
         <ThemedView style={[styles.itemView, theme.elevation.low as any]}>
           <ThemedText style={styles.titleText}>Hastalar</ThemedText>
           <View style={styles.inputRow}>
@@ -162,12 +164,13 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: theme.palette.background,
   },
   itemView: {
     backgroundColor: "#fff",
     marginLeft: theme.spacing.md,
     marginRight: theme.spacing.md,
+    borderRadius: 12,
   },
   titleText: {
     fontSize: 24,

@@ -14,15 +14,36 @@ import {
 } from "react-native";
 import theme from "../styles/theme";
 
+/* MESAJ TİPİ */
+type ChatMessage = {
+  text: string;
+  from: "user" | "ai";
+};
+
 export default function TabTwoScreen(): React.ReactElement {
   const [message, setMessage] = useState("");
-  const [chat, setChat] = useState<string[]>([]);
+  const [chat, setChat] = useState<ChatMessage[]>([]);
 
   const sendMessage = () => {
     if (message.trim() === "") return;
 
-    setChat((prev) => [...prev, message.trim()]);
+    const userMessage = message.trim();
+
+    /* KULLANICI MESAJI */
+    setChat((prev) => [...prev, { text: userMessage, from: "user" }]);
+
     setMessage("");
+
+    /* SAHTE AI CEVABI (DEMO İÇİN) */
+    setTimeout(() => {
+      setChat((prev) => [
+        ...prev,
+        {
+          text: "Verileriniz analiz edildi. Mevcut ölçümlere göre solunum değerleriniz stabil görünüyor. Düzenli ölçüm yapmaya devam etmeniz önerilir.",
+          from: "ai",
+        },
+      ]);
+    }, 600);
   };
 
   return (
@@ -35,29 +56,41 @@ export default function TabTwoScreen(): React.ReactElement {
           style={styles.container}
           behavior={Platform.OS === "ios" ? "padding" : undefined}
         >
-          <View style={styles.top}>
-            <View style={styles.hero}>
-              <Text style={styles.title}>AI Asistanı</Text>
-              <Text style={styles.subtitle}>
-                Nefes sağlığınız hakkında yapay zeka destekli sohbet ve öneriler
-                alabilirsiniz.
-              </Text>
-            </View>
+          {/* ÜST BÖLÜM */}
+          <View style={styles.hero}>
+            <Text style={styles.title}>AI Asistanı</Text>
+            <Text style={styles.subtitle}>
+              Nefes sağlığınız hakkında yapay zeka destekli sohbet ve öneriler
+            </Text>
           </View>
 
+          {/* CHAT ALANI */}
           <ScrollView
             style={styles.chatArea}
             contentContainerStyle={{ paddingBottom: 20 }}
           >
             {chat.map((msg, i) => (
-              <View key={i} style={styles.bubbleWrapper}>
-                <View style={[styles.bubble, theme.elevation.low as any]}>
-                  <Text style={styles.bubbleText}>{msg}</Text>
+              <View
+                key={i}
+                style={[
+                  styles.bubbleWrapper,
+                  msg.from === "ai" && { alignItems: "flex-start" },
+                ]}
+              >
+                <View
+                  style={[
+                    styles.bubble,
+                    theme.elevation.low as any,
+                    msg.from === "ai" && styles.aiBubble,
+                  ]}
+                >
+                  <Text style={styles.bubbleText}>{msg.text}</Text>
                 </View>
               </View>
             ))}
           </ScrollView>
 
+          {/* ALT GİRİŞ */}
           <View style={styles.footer}>
             <View style={styles.inputRow}>
               <TextInput
@@ -79,6 +112,7 @@ export default function TabTwoScreen(): React.ReactElement {
   );
 }
 
+/* STYLES */
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
@@ -89,8 +123,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: theme.spacing.md,
   },
-
-  top: {},
 
   hero: {
     backgroundColor: theme.palette.primaryLight,
@@ -104,19 +136,12 @@ const styles = StyleSheet.create({
     fontWeight: "800",
     color: theme.palette.text,
   },
+
   subtitle: {
     marginTop: theme.spacing.sm,
     color: theme.palette.primaryDark,
+    textAlign: "center",
   },
-
-  card: {
-    marginTop: theme.spacing.md,
-    backgroundColor: theme.palette.surface,
-    padding: theme.spacing.md,
-    borderRadius: 12,
-  },
-  cardTitle: { fontWeight: "700", color: theme.palette.text },
-  cardText: { color: theme.palette.muted, marginTop: theme.spacing.sm },
 
   chatArea: {
     flex: 1,
@@ -136,6 +161,11 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderWidth: 1,
     borderColor: theme.palette.border,
+  },
+
+  aiBubble: {
+    backgroundColor: theme.palette.primaryLight,
+    borderColor: theme.palette.primary,
   },
 
   bubbleText: {

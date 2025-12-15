@@ -6,6 +6,7 @@ import {
   Button,
   SafeAreaView,
   ScrollView,
+  StatusBar,
   StyleSheet,
   Text,
   View,
@@ -29,6 +30,7 @@ export default function TabTwoScreen(): React.ReactElement {
 
   return (
     <SafeAreaView style={styles.screen}>
+      <StatusBar barStyle="dark-content" />
       <ScrollView>
         <View style={[styles.header, theme.elevation.low as any]}>
           <Text style={styles.title}>Analizler</Text>
@@ -40,22 +42,22 @@ export default function TabTwoScreen(): React.ReactElement {
         {/* ANA METRİKLER */}
         <View style={styles.metricsRow}>
           <View style={[styles.metricCard, theme.elevation.low as any]}>
-            <Text style={styles.metricValue}>—</Text>
+            <Text style={styles.metricValue}>72</Text>
             <Text style={styles.metricLabel}>Son 1 Ay</Text>
           </View>
           <View style={[styles.metricCard, theme.elevation.low as any]}>
-            <Text style={styles.metricValue}>—</Text>
+            <Text style={styles.metricValue}>68</Text>
             <Text style={styles.metricLabel}>Son 3 Ay</Text>
           </View>
         </View>
 
         <View style={styles.metricsRow}>
           <View style={[styles.metricCard, theme.elevation.low as any]}>
-            <Text style={styles.metricValue}>—</Text>
+            <Text style={styles.metricValue}>65</Text>
             <Text style={styles.metricLabel}>Son 6 Ay</Text>
           </View>
           <View style={[styles.metricCard, theme.elevation.low as any]}>
-            <Text style={styles.metricValue}>—</Text>
+            <Text style={styles.metricValue}>61</Text>
             <Text style={styles.metricLabel}>Son 1 Yıl</Text>
           </View>
         </View>
@@ -65,12 +67,12 @@ export default function TabTwoScreen(): React.ReactElement {
         <View style={styles.metricsRow}>
           <View style={[styles.trendCard, theme.elevation.low as any]}>
             <Text style={styles.trendTitle}>Stabilite</Text>
-            <Text style={styles.trendValue}>—%</Text>
+            <Text style={styles.trendValue}>84%</Text>
             <Text style={styles.trendSub}>Genel değişim</Text>
           </View>
           <View style={[styles.trendCard, theme.elevation.low as any]}>
             <Text style={styles.trendTitle}>İyileşme</Text>
-            <Text style={styles.trendValue}>—%</Text>
+            <Text style={styles.trendValue}>+12%</Text>
             <Text style={styles.trendSub}>Son ay</Text>
           </View>
         </View>
@@ -80,24 +82,24 @@ export default function TabTwoScreen(): React.ReactElement {
         <View style={styles.metricsRow}>
           <View style={[styles.avgCard, theme.elevation.low as any]}>
             <Text style={styles.avgTitle}>VOC Seviyesi</Text>
-            <Text style={styles.avgValue}>— ppm</Text>
+            <Text style={styles.avgValue}>320 ppm</Text>
           </View>
 
           <View style={[styles.avgCard, theme.elevation.low as any]}>
             <Text style={styles.avgTitle}>Nem Etkisi</Text>
-            <Text style={styles.avgValue}>—%</Text>
+            <Text style={styles.avgValue}>45%</Text>
           </View>
         </View>
 
         <View style={styles.metricsRow}>
           <View style={[styles.avgCard, theme.elevation.low as any]}>
             <Text style={styles.avgTitle}>Solunum Kalitesi</Text>
-            <Text style={styles.avgValue}>—/100</Text>
+            <Text style={styles.avgValue}>78 / 100</Text>
           </View>
 
           <View style={[styles.avgCard, theme.elevation.low as any]}>
             <Text style={styles.avgTitle}>Kararlılık Skoru</Text>
-            <Text style={styles.avgValue}>—</Text>
+            <Text style={styles.avgValue}>A−</Text>
           </View>
         </View>
 

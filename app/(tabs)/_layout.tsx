@@ -2,8 +2,8 @@ import { Tabs } from "expo-router";
 import React from "react";
 
 import { HapticTab } from "@/components/haptic-tab";
-import { IconSymbol } from "@/components/ui/icon-symbol";
 import { useColorScheme } from "@/hooks/use-color-scheme";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import {} from "react-native";
 
 export default function TabLayout() {
@@ -24,7 +24,11 @@ export default function TabLayout() {
         options={{
           title: "Cihazlarım",
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="house.fill" color={color} />
+            <MaterialCommunityIcons
+              name="bluetooth-connect"
+              size={26}
+              color={color}
+            />
           ),
         }}
       />
@@ -33,16 +37,20 @@ export default function TabLayout() {
         options={{
           title: "Ana Sayfa",
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="paperplane.fill" color={color} />
+            <MaterialCommunityIcons
+              name="heart-pulse"
+              size={26}
+              color={color}
+            />
           ),
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="aiAgent"
         options={{
           title: "Yapay Zeka Danışmanı",
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="repeat" color={color} />
+            <MaterialCommunityIcons name="robot" size={28} color={color} />
           ),
         }}
       />
@@ -51,7 +59,11 @@ export default function TabLayout() {
         options={{
           title: "Geri Bildirimlerim",
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="dot.viewfinder" color={color} />
+            <MaterialCommunityIcons
+              name="chat-processing-outline"
+              size={26}
+              color={color}
+            />
           ),
         }}
       />

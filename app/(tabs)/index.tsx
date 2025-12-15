@@ -217,7 +217,7 @@ export default function HomeScreen(): React.ReactElement {
         <View style={styles.statusCard}>
           <Text style={styles.statusLabel}>Bağlı Cihaz</Text>
           <Text style={styles.statusValue}>
-            {connectedDeviceId ?? "Hiçbiri"}
+            {/* {connectedDeviceId ?? "Hiçbiri"} */} MATRİS NEFES ÖLÇÜM CİHAZI
           </Text>
         </View>
       </View>
